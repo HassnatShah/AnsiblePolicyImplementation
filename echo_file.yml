@@ -1,0 +1,15 @@
+-
+  hosts: distribution
+  become: yes
+  become_user: root
+  vars:
+    ansible_become_pass: 123
+
+  tasks:
+    - name: Update Package on Debian Machine
+      command: echo "Host is Accessible"
+
+      # To Check Distribution
+    - name: Debug ansible_distribution
+      debug:
+        var: ansible_distribution

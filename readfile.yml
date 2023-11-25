@@ -1,0 +1,15 @@
+- 
+  hosts: all
+  become: yes
+  ignore_unreachable: true
+  tasks:
+
+    - name: Pirnt File of Firewalld
+      command: cat /lib/systemd/system/firewalld.service
+      #ansible.builtin.shell: cat /lib/systemd/system/firewalld.service
+      register: firewalld
+    
+    - name: Print the full output
+      ansible.builtin.debug:
+        #var: firewalld
+        msg: "{{ firewalld.stdout_lines.RefuseManualStop }}"

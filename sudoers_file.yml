@@ -1,0 +1,34 @@
+---
+- name: Test write permissions
+  hosts: all
+  become: yes
+  become_user: root
+  
+  tasks:
+    - name: Copy Script
+      copy:
+        src: ./sudoers.sh
+        dest: /tmp/
+        mode: '0777'
+
+    - name: Copy Permission
+      copy:
+        src: ./permission
+        dest: /tmp/permission
+        
+    - name: Run script
+      command: /bin/bash /tmp/sudoers.sh
+    
+    # - name: Create a test file
+    #   file:
+    #     path: /tmp/test_file
+    #     state: touch
+
+    # - name: Copy File
+    #   copy:
+    #     src: /tmp/test_file
+    #     dest: /etc/sudoers.d/
+    #     remote_src: yes
+    #     owner: root
+    #     mode: '0440'
+    #     force: yes
